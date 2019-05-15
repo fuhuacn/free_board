@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <package namespace="/admin" name="admin" extends="default">
+        <result-types>
+            <result-type name="json" class="org.apache.struts2.json.JSONResult"/>
+        </result-types>
+        <action name="logout" class="action.AdminlistAction" method="logout">
+            <result>/admin/landing.jsp</result>
+        </action>
+        <action name="modify" class="action.AdminlistAction" method="modify">
+            <result type="json"></result>
+        </action>
+        <action name="boardManage">
+            <result>/admin/boardManage.jsp</result>
+           <!-- <result type="json"></result>-->
+        </action>
+        <action name="boardList" class="action.DashboardconfigAction" method="findBoard">
+            <result name="success">/admin/boardList.jsp</result>
+        </action>
+        <action name="boardDetails" class="action.DashboardconfigAction" method="findBoardDetails">
+            <result>/admin/boardDetails.jsp</result>
+            <!--<result type="json"></result>-->
+        </action>
+        <action name="deleteBoard" class="action.DashboardconfigAction" method="deleteBoard">
+            <result type="json"></result>
+        </action>
+        <action name="deleteBoardCheck" class="action.DashboardconfigAction" method="deleteBoardCheck">
+            <result type="json"></result>
+        </action>
+        <action name="setBoards" class="action.DashboardconfigAction" method="setBoard">
+            <result type="json"></result>
+        </action>
+        <action name="newBoard">
+            <result>/admin/newBoard.jsp</result>
+        </action>
+        <action name="createBoard"  class="action.DashboardconfigAction" method="createBoard">
+            <result type="json"></result>
+        </action>
+        <action name="cardList" class="action.CardconfigAction" method="findAllCard">
+            <result name="success">/admin/cardList.jsp</result>
+        </action>
+        <action name="cardDetails" class="action.CardconfigAction" method="findCardDetails">
+            <result>/admin/cardDetails.jsp</result>
+        </action>
+        <action name="updateCard" class="action.CardconfigAction" method="updateCard">
+            <result type="json"></result>
+        </action>
+        <action name="newCard">
+            <result>/admin/newCard.jsp</result>
+        </action>
+        <action name="createCard" class="action.CardconfigAction" method="createCard">
+            <result type="json"></result>
+        </action>
+        <action name="deleteCard" class="action.CardconfigAction" method="deleteCard">
+            <result type="json"></result>
+        </action>
+        <action name="changeOrder" class="action.CardconfigAction" method="changeOrder">
+            <result type="json"></result>
+        </action>
+        <action name="fileManage">
+            <result>/admin/listFiles.jsp</result>
+        </action>
+        <action name="adminPage">
+            <result>/admin/boardManage.jsp</result>
+        </action>
+        <action name="listFiles" class="action.UploadAction" method="findFileInDatabase">
+            <result>/admin/fileList.jsp</result>
+        </action>
+        <action name="deleteFile" class="action.UploadAction" method="deleteFile">
+            <result type="json"></result>
+        </action>
+        <action name="updateFile" class="action.UploadAction" method="updateFileDatabase">
+            <result type="json"></result>
+        </action>
+        <action name="fuzzySearch" class="action.UploadAction" method="fuzzySearch">
+            <result name="success">/admin/fileList.jsp</result>
+        </action>
+    </package>
+</struts>

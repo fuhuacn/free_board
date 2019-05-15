@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<!-- 开发阶段，设置为开发模式 -->
+	<constant name="struts.devMode" value="true" />
+	<!--拦截没有后缀的URL,如/ /hello /user/ -->
+	<constant name="struts.action.extension" value="," />
+	<!-- 限制上传限制大小 ，改成20M -->
+	<constant name="struts.multipart.maxSize" value="1000000000" />
+	<constant name="struts.multipart.saveDir" value="/tmp"/>
+
+	<!-- 允许OGNL调用静态方法 -->
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true"/>
+
+	<package name="default" extends="struts-default" abstract="true" >
+		<result-types>
+			<result-type name="json" class="org.apache.struts2.json.JSONResult" />
+		</result-types>
+
+		<!-- 当没有对应action时，返回404页面 -->
+		<default-action-ref name="404" />
+
+		<default-class-ref class="com.opensymphony.xwork2.ActionSupport" />
+
+		<global-exception-mappings>
+			<exception-mapping result="error" exception="java.lang.Exception" />
+		</global-exception-mappings>
+
+		<action name="404">
+			<result>/error/404.jsp</result>
+		</action>
+		<action name="error">
+			<result>/error/500.jsp</result>
+		</action>
+
+	</package>
+
+
+	<package namespace="/" name="" extends="default">
+		<result-types>
+			<result-type name="json" class="org.apache.struts2.json.JSONResult" />
+		</result-types>
+		<action name="" class="action.DashboardconfigAction" >
+			<result name="success">/index/dashboard.jsp</result>
+			<result name="input">/error/404.jsp</result>
+		</action>
+		<action name="getData" class="action.CardconfigAction">
+			<result name="success" type="json">
+				<param name="excludeNullProperties">true</param>
+			</result>
+			<result name="error" type="json">
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<action name="getDataByIds" class="action.CardconfigAction" method="updateData">
+			<result name="success" type="json">
+				<param name="excludeNullProperties">true</param>
+			</result>
+			<result name="error" type="json">
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<action name="addMonitor" class="action.CardconfigAction" method="addMonitor">
+			<result name="success" type="json">
+				<param name="excludeNullProperties">true</param>
+			</result>
+			<result name="error" type="json">
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<action name="updateMonitor" class="action.CarddataAction" method="updateData">
+			<result name="success" type="json">
+				<param name="excludeNullProperties">true</param>
+			</result>
+			<result name="error" type="json">
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<action name="changeSize" class="action.CardconfigAction" method="changeSize">
+			<result name="success" type="json">
+				<param name="excludeNullProperties">true</param>
+			</result>
+			<result name="error" type="json">
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<action name="uploadFile" class="action.UploadAction">
+			<result name="success" type="json">
+				<param name="excludeNullProperties">true</param>
+			</result>
+			<result name="error" type="json">
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<action name="landing">
+			<result>/admin/landing.jsp</result>
+			<!-- <result type="json"></result>-->
+		</action>
+		<action name="admin">
+			<result>/admin/boardManage.jsp</result>
+			<!-- <result type="json"></result>-->
+		</action>
+		<action name="login" class="action.AdminlistAction">
+			<result name="success">/admin/boardManage.jsp</result>
+			<result name="error">/admin/landing.jsp</result>
+			<!-- <result type="json"></result>-->
+
+		</action>
+
+
+
+	</package>
+
+
+
+
+
+	<include file="admin.xml" />
+</struts>
